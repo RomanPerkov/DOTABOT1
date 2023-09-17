@@ -1,5 +1,6 @@
 package com.example.dotabot1.services;
 
+import com.example.dotabot1.entity.users.DotaStats;
 import com.example.dotabot1.entity.users.States.PlayerState;
 import com.example.dotabot1.entity.users.User;
 import com.example.dotabot1.repository.PlayerRepository;
@@ -27,15 +28,17 @@ public class PlayerService {
     public void registerNewPlayer(Long chatId) {
         // Проверяем, есть ли уже такой пользователь в БД
         if (playerRepository.findByChatId(chatId) == null) { // создаем нового пользователя если такого нет в БД
+            DotaStats dotaStats = new DotaStats();
             User player = User.builder()
                     .chatId(chatId)
+                    .dotaStatsId(dotaStats)
                     .state(PlayerState.DEFAULT)
                     .build();
             playerRepository.save(player);
 
             messageGeneratorService.generateWelcomeMessage(chatId);  // приветственное сообщение
         } else {
-            messageGeneratorService.userHasAlreadyBeenCreated(chatId); // пользователь уже существует
+            messageGeneratorService.userHasAlreadyBeenCreatedMessage(chatId); // пользователь уже существует
         }
     }
 }

@@ -28,8 +28,23 @@ public class MessageGeneratorService {
         messageSendler(chatId, "Добро пожаловать в DotaBot! Для завершения регистрации сядьте на бутылку.");
     }
 
-    public void userHasAlreadyBeenCreated(Long chatId) {
-        messageSendler(chatId, "Пошел нахуй пидор, хуйли ты жмешь то блядь, иди на бутылку сядь лучше.");
+    public void userHasAlreadyBeenCreatedMessage(Long chatId) {
+        messageSendler(chatId, "для того что посмотреть список доступных команд введите /help.");
+    }
+
+    public void helpMessage(Long chatId){
+        messageSendler(chatId, "список доступных команд:" +
+                "/updatesteamapikey - ввести свой стим API ключ" +
+                "/updatesteamid - ввести стим айди целевого аккаунта");
+
+    }
+
+    public void updateSteamApiMessage(Long chatId){
+        messageSendler(chatId,"введите Ваш Api ключ");
+    }
+
+    public void updateSteamIdMessage(Long chatId){
+        messageSendler(chatId,"введите steamId целевого аккаунта Steam");
     }
 
 

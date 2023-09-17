@@ -29,7 +29,9 @@ public class UpdateSteamApiKeyState implements StateHandler {
 
         User user = playerRepository.findByChatId(chatId);
         user.setSteamApiKey(messageText);
+        user.setState(PlayerState.DEFAULT);
         playerRepository.save(user);
+
 
 
     }

@@ -24,6 +24,7 @@ public class UpdateSteamIdState implements StateHandler {
 
         User user = playerRepository.findByChatId(chatId);
         user.setSteamId(messageText);
+        user.setState(PlayerState.DEFAULT);
         playerRepository.save(user);
 
 
