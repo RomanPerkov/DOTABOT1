@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+
+/**
+ * Класс генератор сообщений
+ */
 @Service
 @RequiredArgsConstructor
 public class MessageGeneratorService {
@@ -45,6 +49,29 @@ public class MessageGeneratorService {
 
     public void updateSteamIdMessage(Long chatId){
         messageSendler(chatId,"введите steamId целевого аккаунта Steam");
+    }
+
+
+    public void badApiKeyMessage(Long chatId) {
+        messageSendler(chatId, "Вы ввели неправипльный API токен");
+    }
+
+    public void apiKeySuccessfullyAddedMessage(Long chatId) {
+        messageSendler(chatId, "API токен успешно добавлен");
+    }
+
+    public void badSteamIdMessage(Long chatId) {
+        messageSendler(chatId, "Вы ввели неправипльный Steam ID ");
+    }
+
+     public void steamIdSuccessfullyAddedMessage(Long chatId) {
+        messageSendler(chatId, "Steam ID успешно добавлен ");
+    }
+
+
+
+ public void noApiKeyMessage(Long chatId) {
+        messageSendler(chatId, "Вы не ввели API токен ");
     }
 
 

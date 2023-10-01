@@ -23,7 +23,7 @@ public class DotaApiService {
                         .queryParam("key", key)
                         .queryParam("account_id", steamId)
                         .build())
-                .retrieve()
+                .retrieve()             // запускает выполнение http запроса
                 .bodyToMono(String.class);
     }
 

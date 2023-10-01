@@ -1,7 +1,11 @@
 package com.example.dotabot1.telegrambot.Commands;
 
+
+/**
+ * Интерфейс комманд
+ */
 public interface Command {
 
-    public String getName();
+     String getName();
     void executeCommand(Long chatId);
 }

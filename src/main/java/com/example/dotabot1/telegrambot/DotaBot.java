@@ -1,6 +1,8 @@
 package com.example.dotabot1.telegrambot;
 
+import com.example.dotabot1.telegrambot.updatehandler.UpdateHandler;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -22,7 +24,7 @@ public class DotaBot extends TelegramLongPollingBot {
 
     public DotaBot(@Value("${bot.username}") String botUsername,                // через конструктор для того что бы поля были финал
                    @Value("${bot.token}") String botToken,
-                   List<UpdateHandler> updateHandlers) {
+                  @Lazy List<UpdateHandler> updateHandlers) {
         this.botUsername = botUsername;
         this.botToken = botToken;
         this.updateHandlers = updateHandlers;

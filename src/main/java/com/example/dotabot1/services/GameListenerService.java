@@ -10,13 +10,27 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 import java.util.stream.Stream;
 
+
+/**
+ * Класс GameListenerService служит для взаимодействия с API игры Dota и обновления статуса игры пользователей.
+ *
+ * Особенности:
+ * - Использует внедрение зависимости DotaApiService для работы с API Dota.
+ * - Использует PlayerRepository для доступа к данным пользователей в базе данных.
+ * - Метод dotaApiCall() выполняет следующие шаги:
+ *   1. Получает поток (Stream) всех пользователей из базы данных.
+ *   2. Проверяет наличие Steam ID и API Key для каждого пользователя.
+ *   3. Выполняет асинхронный запрос к API Dota для получения статуса игры.
+ *   4. Обновляет статус игры в объекте пользователя.
+ *
+ * В случае возникновения исключений в методах, информация об ошибке логируется.
+ */
 @Service
 @RequiredArgsConstructor
 public class GameListenerService {
@@ -25,7 +39,7 @@ public class GameListenerService {
     private static final Logger logger = LoggerFactory.getLogger(GameListenerService.class);
 
 
-    @Scheduled(fixedRate = 60000)
+   // @Scheduled(fixedRate = 60000)
     @Transactional
     public void dotaApiCall() {
         try (Stream<User> users = playerRepository.streamAllUsers()) { // используем стрим для получения списка пользователей из БД
