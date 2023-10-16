@@ -9,13 +9,17 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
+
+/**
+ * Класс инициализатор бота
+ */
 @Component
 @RequiredArgsConstructor
 public class BotInit {
 
     private final DotaBot dotabot;
 
-    @EventListener({ApplicationReadyEvent.class})
+    @EventListener({ApplicationReadyEvent.class})   // выполнения метода после запуска приложения
     @SneakyThrows
     public void init() {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);

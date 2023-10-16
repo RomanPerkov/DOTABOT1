@@ -6,11 +6,17 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
-
 import java.util.List;
 
+
+/**
+ * Класс DotaBot наследует от TelegramLongPollingBot и представляет собой основную логику бота.
+ *
+ * Основная функциональность:
+ * - Прием и обработка входящих обновлений (сообщений, команд и т.д.) от Telegram API.
+ *
+ */
 @Service
-//@RequiredArgsConstructor
 public class DotaBot extends TelegramLongPollingBot {
 
     // Spring автоматически внедряет все бины, реализующие интерфейс UpdateHandler(это механизм самого спринга он самм выполянет
