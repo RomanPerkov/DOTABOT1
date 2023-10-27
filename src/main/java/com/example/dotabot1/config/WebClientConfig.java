@@ -15,13 +15,19 @@ import org.springframework.web.reactive.function.client.WebClient;
 @EnableScheduling
 public class WebClientConfig {
 
-    @Value("${dota.api.url}")       // адрес в applicationpropirties
-    private String dotaApiUrl;
 
-    @Bean
-    public WebClient webClient() {          // используем вебклиент для запросов
+
+    @Bean(name = "webClientSteamApi")
+    public WebClient webClientSteamApi(@Value("${dota.api.urlDota}") String baseUrl) {
         return WebClient.builder()
-                .baseUrl(dotaApiUrl)
+                .baseUrl(baseUrl)
+                .build();
+    }
+
+    @Bean(name = "webClientOpenDotaApi")
+    public WebClient webClientOpenDotaApi(@Value("${dota.api.urlDotaAPI}") String baseUrl) {
+        return WebClient.builder()
+                .baseUrl(baseUrl)
                 .build();
     }
 }

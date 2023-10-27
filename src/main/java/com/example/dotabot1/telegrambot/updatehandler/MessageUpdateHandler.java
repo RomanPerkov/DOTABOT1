@@ -59,7 +59,7 @@ public class MessageUpdateHandler implements UpdateHandler {
                 PlayerState currentState = playerRepository.findByChatId(chatId).getState();
                 StateHandler stateHandler = stateHandlerMap.get(currentState);
                 if (stateHandler != null) {
-                    stateHandler.executeState(update, chatId, text);
+                    stateHandler.executeState(chatId, text);
                 }
             }
         }

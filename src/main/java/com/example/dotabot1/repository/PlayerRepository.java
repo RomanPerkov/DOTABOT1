@@ -13,7 +13,7 @@ public interface PlayerRepository extends JpaRepository<User, Long> {
     User findByChatId(Long telegramId);
 
     @Query("select u from User u")
-    Stream<User> streamAllUsers();
+    Stream<User> streamAllUsers();              // ленивый обход по бд
 
 
 }
