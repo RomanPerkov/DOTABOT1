@@ -24,10 +24,5 @@ public class WebClientConfig {
                 .build();
     }
 
-    @Bean(name = "webClientOpenDotaApi")
-    public WebClient webClientOpenDotaApi(@Value("${dota.api.urlDotaAPI}") String baseUrl) {
-        return WebClient.builder()
-                .baseUrl(baseUrl)
-                .build();
-    }
+
 }

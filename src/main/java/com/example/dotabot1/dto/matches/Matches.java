@@ -12,4 +12,6 @@ import lombok.ToString;
 public class Matches {
     @JsonProperty("match_id")
     private long matchId;
+    private Long start_time;
+
 }

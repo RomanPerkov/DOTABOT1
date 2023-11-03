@@ -4,6 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+
+/**
+ * Класс ДТО описывающий список матчей в доте ,
+ */
 @Getter
 @Setter
 @ToString

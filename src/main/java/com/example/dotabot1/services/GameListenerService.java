@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -37,10 +38,12 @@ import java.util.stream.Stream;
 public class GameListenerService {
     private final SteamApiService steamApiService;
     private final PlayerRepository playerRepository;
+
+    private final GameMatchService gameMatchService;
     private static final Logger logger = LoggerFactory.getLogger(GameListenerService.class);
 
 
-    // @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 60000)
     @Transactional
     public void dotaApiCall() {
         try (Stream<User> users = playerRepository.streamAllUsers()) { // используем стрим для получения списка пользователей из БД
@@ -63,7 +66,8 @@ public class GameListenerService {
                                                     playerRepository.save(user);
                                                 },
                                                 () -> {                                                             // если пустой , то выполняем вторую лямбду
-                                                    if (user.getDotaStatsId().getStatus() != DotaState.NONGAME) {   //меняем статус на нон гейм если таковой уже не стоит
+                                                    if (user.getDotaStatsId().getStatus() != DotaState.NONGAME) {
+                                                        gameMatchService.finalStatsMessage(user.getChatId(),user);                                                            //меняем статус на нон гейм если таковой уже не стоит
                                                         user.getDotaStatsId().setStatus(DotaState.NONGAME);
                                                         playerRepository.save(user);
                                                     }

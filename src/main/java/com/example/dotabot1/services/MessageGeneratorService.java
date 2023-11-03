@@ -41,9 +41,17 @@ public class MessageGeneratorService {
     }
 
     public void helpMessage(Long chatId) {
-        messageSendler(chatId, "список доступных команд:" +
-                "/updatesteamapikey - ввести свой стим API ключ" +
-                "/updatesteamid - ввести стим айди целевого аккаунта");
+        messageSendler(chatId, "список доступных команд:\n" +
+
+                "/getmatcheslist - получить детали матчей за последние 72 часа " + "\n"+
+                " Для того, что бы бот работал, Вам надо предоставить ему свой Steam API Key и Steam ID аккаунта за которым он будет следить," +
+                "так же для того  ,что бы получать детали матчей в аккаунте за котором бот следит надо включить \n" +
+                "https://www.youtube.com/watch?v=l2X_NMj8khw   - как включить общедоступную историю матчей \n" +
+                "https://www.youtube.com/watch?v=tpa8lPIeJEo  - как получить стим АПИ ключ \n" +
+                "https://www.youtube.com/watch?v=9tXmFeGtQJQ  - как получить Steam ID аккаунта \n" +
+                "Без общедоступной истории матчей бот будет отслеживать только факт захода и выхода в Dota2\n" +
+                "Для ввода в бота Steam API Key и Steam ID воспользуйтесь командой /menu\n" +
+                "");
 
     }
 
@@ -97,9 +105,39 @@ public class MessageGeneratorService {
     public void playerMatchsStats(Long chatId, MatchDetails matchDetails) {
         messageSendler(chatId,
                 "MatchInfo" + "\n" +
-                        "Время старта: " + convertUnixToReadable(matchDetails.getResult().getStart_time()) + "\n" + "\n" +
-                        "Продолжительность матча: " + convertDuration(matchDetails.getResult().getDuration()) + "\n" + "\n" +
-                        "Выйграла команда " + (matchDetails.getResult().isRadiant_win() ? "Света " : " Тьмы") + ""
+                        "Время старта: " + convertUnixToReadable(matchDetails.getResult().getStart_time()) + "\n" +
+                        "Продолжительность матча: " + convertDuration(matchDetails.getResult().getDuration()) + "\n" +
+                        "Выйграла команда " + (matchDetails.getResult().isRadiant_win() ? "Света " : " Тьмы") + "\n"+
+                        ""
                         );
+    }
+
+    public void congratsOnWin(Long chatId,MatchDetails matchDetails) {
+        messageSendler(chatId,
+                "MatchInfo" + "\n" +
+                        "Время старта: " + convertUnixToReadable(matchDetails.getResult().getStart_time()) + "\n" +
+                        "Продолжительность матча: " + convertDuration(matchDetails.getResult().getDuration()) + "\n" +
+                        "Выйграла команда " + (matchDetails.getResult().isRadiant_win() ? "Света " : " Тьмы") + "\n" +
+                        "Игрок выйграл"
+        );
+    }
+        public void betterLuckNextTime(Long chatId,MatchDetails matchDetails){
+            messageSendler(chatId,
+                    "MatchInfo" + "\n" +
+                            "Время старта: " + convertUnixToReadable(matchDetails.getResult().getStart_time()) + "\n" +
+                            "Продолжительность матча: " + convertDuration(matchDetails.getResult().getDuration()) + "\n" +
+                            "Выйграла команда " + (matchDetails.getResult().isRadiant_win() ? "Света " : " Тьмы") + "\n"+
+                            "Игрок проиграл"
+            );
+    }
+
+    public void exceptionSendFromDeveloper(Long chatId, String text){
+        int maxLength = 4096;
+        String longStackTrace = text; // твой длинный стек трейс
+
+        if (longStackTrace.length() > maxLength) {
+            longStackTrace = longStackTrace.substring(0, maxLength);
+        }
+        messageSendler(chatId,longStackTrace);
     }
 }

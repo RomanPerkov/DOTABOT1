@@ -35,6 +35,7 @@ public class DotaStats {
     @Column(name = "average_assists")
     private double averageAssists;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="status")
     private DotaState status;
 

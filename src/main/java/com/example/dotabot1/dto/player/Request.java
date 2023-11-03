@@ -5,6 +5,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Класс ДТО описывающий игрока доты
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor

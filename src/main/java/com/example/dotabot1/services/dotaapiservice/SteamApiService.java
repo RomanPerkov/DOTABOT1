@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 
 /**
- * Класс с методами для API
+ * Класс с реактивынми методами для API
  */
 @Service
 public class SteamApiService {
@@ -21,6 +21,13 @@ public class SteamApiService {
         this.webClientSteamApi = webClientSteamApi;
     }
 
+
+    /**
+     * Метод получает список матчей
+     * @param steamId
+     * @param key
+     * @return реактивный поток с сущностью истории матчей
+     */
     public Mono<RequestHistory> getPlayerMatchHistory(String steamId, String key) {
         return webClientSteamApi.get()
                 .uri(uriBuilder -> uriBuilder
@@ -32,6 +39,13 @@ public class SteamApiService {
                 .bodyToMono(RequestHistory.class);
     }
 
+
+    /**
+     * Метод получает сущность стим аккаунта
+     * @param steamId стим айди стим аккаунта
+     * @param key   стим АПИ ключ разработчика
+     * @return  реактивный поток с сущностью стим аккаунта
+     */
     public Mono<Request> getPlayerStatus(String steamId, String key) {
         return webClientSteamApi.get()
                 .uri(uriBuilder -> uriBuilder
@@ -43,8 +57,14 @@ public class SteamApiService {
                 .bodyToMono(Request.class);
     }
 
+    /**
+     * метод получает подробности матча
+     * @param matchId  айди матча в доте
+     * @param key  стим АПИ ключ разработчика
+     * @return реактивный поток с сущностью матча
+     */
+
     public Mono<MatchDetails> getMatchDetails(String matchId, String key) {
-        System.out.println(2222222);
         return webClientSteamApi.get()
                 .uri(uriBuilder -> uriBuilder
                         .queryParam("key", key)
