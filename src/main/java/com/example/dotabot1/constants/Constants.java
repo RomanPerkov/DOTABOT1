@@ -18,7 +18,7 @@ public class Constants {
         public static final String  MENU_COMMAND = "/menu";
         public static final String  UPDATE_STEAM_API_KEY_COMMAND = "/updatesteamapikey";
         public static final String  UPDATE_STEAM_ID_COMMAND = "/updatesteamid";
-
-        public static final String GET_MATCHES_LIST = "/getmatcheslist";
+        public static final String GET_MATCHES_LIST_COMMAND = "/getmatcheslist";
+        public static final String STOP_COMMAND = "/stop";
     }
 }

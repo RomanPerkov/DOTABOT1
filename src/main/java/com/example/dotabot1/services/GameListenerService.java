@@ -15,6 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.time.Instant;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -39,6 +40,7 @@ public class GameListenerService {
     private final SteamApiService steamApiService;
     private final PlayerRepository playerRepository;
 
+    private final MessageGeneratorService messageGeneratorService;
     private final GameMatchService gameMatchService;
     private static final Logger logger = LoggerFactory.getLogger(GameListenerService.class);
 
@@ -60,16 +62,25 @@ public class GameListenerService {
                                         .map(Request::getResponse)                   // преобразовываем реквест в респонс
                                         .map(r -> r.getPlayers().get(0))              //преобразовываем респонс в плауер
                                         .map(Player::getGameid)                        // преобразовыываем плауер в getGameid
-                                        .ifPresentOrElse(gameId ->
+                                        .ifPresentOrElse(gameId ->                      // если gameid не null то первая люмбда tckb null то вторая
                                                 {
-                                                    user.getDotaStatsId().setStatus(DotaState.INGAME);// меняем статус если не пустой оптионал
-                                                    playerRepository.save(user);
+                                                    if (user.getDotaStatsId().getStatus() != DotaState.INGAME) {
+                                                        user.getDotaStatsId().setStatus(DotaState.INGAME);// меняем статус если не пустой оптионал
+                                                        user.getDotaStatsId().setStartsession(Instant.now().getEpochSecond());
+                                                        playerRepository.save(user);
+                                                        messageGeneratorService.inGameMessage(user.getChatId());
+                                                    }
+//
                                                 },
                                                 () -> {                                                             // если пустой , то выполняем вторую лямбду
-                                                    if (user.getDotaStatsId().getStatus() != DotaState.NONGAME) {
-                                                        gameMatchService.finalStatsMessage(user.getChatId(),user);                                                            //меняем статус на нон гейм если таковой уже не стоит
+                                                    if (user.getDotaStatsId().getStatus() != DotaState.NONGAME ) {
+                                                        gameMatchService.matchPlayedOverThePastHours(user.getChatId(), gameMatchService.getUserByChatId(user.getChatId()), Float.valueOf(gameMatchService.durationSession(user.getDotaStatsId().getStartsession()))).subscribe();                                                            //меняем статус на нон гейм если таковой уже не стоит
                                                         user.getDotaStatsId().setStatus(DotaState.NONGAME);
+                                                        messageGeneratorService.durationSessionMessage(user.getChatId(),gameMatchService.durationSession(user.getDotaStatsId().getStartsession()));
+                                                        user.getDotaStatsId().setStartsession(null);
                                                         playerRepository.save(user);
+                                                        messageGeneratorService.nonGameMessage(user.getChatId());
+
                                                     }
                                                 }),  // КОНЕЦ ПЕРВОЙ ЛЯМБЫ
                         error -> {                  // ВТОРАЯ ЛЯМБА ОБРАБОТКА ОШИБОК

@@ -14,6 +14,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +34,32 @@ public class GameMatchService {
     private final MessageGeneratorService messageGeneratorService;
     private final PlayerRepository playerRepository;
     private static final Logger logger = LoggerFactory.getLogger(GameMatchService.class);
+
+    /**
+     * Конвертер юникс времени в нормальное
+     * @param unixTimestamp временная точка в юникс времени
+     * @return преобрахует юникс время в нормальное
+     */
+    public static String convertUnixToReadable(long unixTimestamp) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        Instant instant = Instant.ofEpochSecond(unixTimestamp);
+        LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        return formatter.format(dateTime);
+    }
+
+    /**
+     * Конвертер юникс длительности в нормальную
+     * @param unixTimestamp продолжительность матча в юникс формате
+     * @return преобразует юникс продолжительность в нормальную
+     */
+    public static String convertDuration(long unixTimestamp) {
+        Duration duration = Duration.ofSeconds(unixTimestamp);
+        return String.format("%d:%02d:%02d",
+                duration.toHours(),
+                duration.toMinutesPart(),
+                duration.toSecondsPart());
+
+    }
 
     /**
      * Метод совершает обращенеи к БД завернутое в fromCallable для избежание блокировки потоков
@@ -117,11 +148,15 @@ public class GameMatchService {
      * @return возвращает реаткивный поток Void
      */
 
-    public Mono<Void> matchPlayedOverThePast24Hours(Long chatId, Mono<User> userMono) {
+
+
+
+
+    public Mono<Void> matchPlayedOverThePastHours(Long chatId, Mono<User> userMono, Float hours) {
 
         return userMono.flatMap(user -> {  // достаем объект User из реактивного потока
             long currentTimestamp = System.currentTimeMillis() / 1000;
-            long twentyFourHoursAgo = currentTimestamp - (72 * 60 * 60);
+            Float twentyFourHoursAgo = currentTimestamp - (hours * 60 * 60);
             // Используем полученный объект User, чтобы получить список его матчей
             return getIdMatchesList(user)
                     // Преобразуем список матчей в реактивный поток (Flux)
@@ -151,32 +186,12 @@ public class GameMatchService {
     }
 
     /**
-     * Метод отправляет сообщение пользователю о том выйграл ли игрок последний сыгранный матч или проиграл на основе данных
-     * полученных из цепочки вызовов
-     *
-     * @param chatId чат айди пользователя телеграм
-     * @user Объект пользователя
+     * Высчитывает сколько длилась игровая сессия
+     * @param startSession время старта сессии
+     * @return разницу между сейчас и временем старта + 5 минут
      */
-
-    public void finalStatsMessage(Long chatId, User user) {
-        checkLastMatchWin(user)
-                .doOnNext(isWin -> {
-                    if (isWin) {
-                        messageGeneratorService.playerIsWin(chatId);  // Отправляем сообщение о том, что игрок выиграл
-                        logger.info("Игрок выйграл последний сыграный матч ");
-                    } else {
-                        messageGeneratorService.playerIsLose(chatId); // Отправляем сообщение о том, что игрок проиграл
-                        logger.info("Игрок проиграл последнйи сыграный матч");
-                    }
-                })
-                .doOnSuccess(result -> {
-                    logger.info("Successfully completed the operation for chatId {}", chatId); // Логируем успешное завершение потока
-                })
-                .doOnError(e -> {
-                    logger.error("An error occurred for chatId {}: {}", chatId, e.getMessage()); // Логируем ошибку
-                })
-                .subscribe();
+    public Long durationSession(Long startSession){
+        return (Instant.now().getEpochSecond()-startSession)+300000;
     }
-
 
 }

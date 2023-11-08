@@ -17,23 +17,10 @@ public class DotaStats {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "total_games")
-    private int totalGames;
+    @Column(name = "start_session")
+    Long startsession;
 
-    @Column(name = "total_wins")
-    private int totalWins;
 
-    @Column(name = "total_losses")
-    private int totalLosses;
-
-    @Column(name = "average_kills")
-    private double averageKills;
-
-    @Column(name = "average_deaths")
-    private double averageDeaths;
-
-    @Column(name = "average_assists")
-    private double averageAssists;
 
     @Enumerated(EnumType.STRING)
     @Column(name="status")

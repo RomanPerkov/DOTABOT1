@@ -3,11 +3,9 @@ package com.example.dotabot1.telegrambot.Commands;
 
 import com.example.dotabot1.services.GameMatchService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import static com.example.dotabot1.constants.Constants.CommandsConstants.GET_MATCHES_LIST;
+import static com.example.dotabot1.constants.Constants.CommandsConstants.GET_MATCHES_LIST_COMMAND;
 
 
 /**
@@ -18,12 +16,12 @@ import static com.example.dotabot1.constants.Constants.CommandsConstants.GET_MAT
 public class GetMatchesIDListCommand implements Command {
     private final GameMatchService gameMatchService;
 
-    private static final Logger logger = LoggerFactory.getLogger(GetMatchesIDListCommand.class);
+
 
 
     @Override
     public String getName() {
-        return GET_MATCHES_LIST;
+        return GET_MATCHES_LIST_COMMAND;
     }
 
 
@@ -36,6 +34,6 @@ public class GetMatchesIDListCommand implements Command {
      *               методов для использования его в работе
      */
     public void executeCommand(Long chatId) {
-        gameMatchService.matchPlayedOverThePast24Hours(chatId, gameMatchService.getUserByChatId(chatId)).subscribe();
+        gameMatchService.matchPlayedOverThePastHours(chatId, gameMatchService.getUserByChatId(chatId), 72F).subscribe();
     }
 }

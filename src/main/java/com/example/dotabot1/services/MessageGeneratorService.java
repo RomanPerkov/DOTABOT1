@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import static com.example.dotabot1.dto.matchesdetails.Result.convertDuration;
-import static com.example.dotabot1.dto.matchesdetails.Result.convertUnixToReadable;
+import static com.example.dotabot1.services.GameMatchService.convertDuration;
+import static com.example.dotabot1.services.GameMatchService.convertUnixToReadable;
 
 
 /**
@@ -51,7 +51,7 @@ public class MessageGeneratorService {
                 "https://www.youtube.com/watch?v=9tXmFeGtQJQ  - как получить Steam ID аккаунта \n" +
                 "Без общедоступной истории матчей бот будет отслеживать только факт захода и выхода в Dota2\n" +
                 "Для ввода в бота Steam API Key и Steam ID воспользуйтесь командой /menu\n" +
-                "");
+                "/stop - останавливает слежение, для возобновления слежение необходимо будет повторно ввести Steam ID");
 
     }
 
@@ -131,6 +131,13 @@ public class MessageGeneratorService {
             );
     }
 
+    public void inGameMessage(Long chatId){
+        messageSendler(chatId,"Пользователь ворвался в игру");
+    }
+    public void nonGameMessage(Long chatId){
+        messageSendler(chatId,"Пользователь завершил игру");
+    }
+
     public void exceptionSendFromDeveloper(Long chatId, String text){
         int maxLength = 4096;
         String longStackTrace = text; // твой длинный стек трейс
@@ -139,5 +146,9 @@ public class MessageGeneratorService {
             longStackTrace = longStackTrace.substring(0, maxLength);
         }
         messageSendler(chatId,longStackTrace);
+    }
+
+    public void durationSessionMessage(Long chatId, Long durationSession){
+        messageSendler(chatId, "Продолжительность сесси " + convertDuration(durationSession) );
     }
 }
