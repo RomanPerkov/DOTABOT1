@@ -15,8 +15,5 @@ public enum PlayerState {
         this.code = code;
     }
 
-    public int getCode() {
-        return code;
-    }
 
 }

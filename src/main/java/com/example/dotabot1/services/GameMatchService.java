@@ -118,17 +118,6 @@ public class GameMatchService {
     }
 
     /**
-     * Метод получает пользователя и проверяет выйграл ли он последний матч*
-     *
-     * @return возвращает Mono булеан для исполльзования его в finalStatsMessage
-     */
-    public Mono<Boolean> checkLastMatchWin(User user) {
-        return getIdMatchesList(user) // реактивный запрос возвращающий Mono тип лист типа матчей
-                .map(matchesList -> matchesList.get(0).getMatchId()) // получаем последний сыграный матч
-                .flatMap(lastMatchId -> didPlayerWin(user.getSteamId(), String.valueOf(lastMatchId), user)); // преобразовываем в другой реактивный поток для вложения его в метод didPlayerWin для определения результата матча
-    }
-
-    /**
      * Метод получает
      *
      * @param user  пользователя

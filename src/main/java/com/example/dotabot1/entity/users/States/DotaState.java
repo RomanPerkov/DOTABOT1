@@ -14,7 +14,5 @@ public enum DotaState {
         this.code = code;
     }
 
-    public int getCode() {
-        return code;
-    }
+
 }
