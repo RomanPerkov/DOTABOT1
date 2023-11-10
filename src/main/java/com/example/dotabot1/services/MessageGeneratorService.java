@@ -43,7 +43,7 @@ public class MessageGeneratorService {
     public void helpMessage(Long chatId) {
         messageSendler(chatId, "список доступных команд:\n" +
 
-                "/getmatcheslist - получить детали матчей за последние 72 часа " + "\n"+
+                "/getmatcheslist - получить детали матчей за последние 48 часа " + "\n"+
                 " Для того, что бы бот работал, Вам надо предоставить ему свой Steam API Key и Steam ID аккаунта за которым он будет следить," +
                 "так же для того  ,что бы получать детали матчей в аккаунте за котором бот следит надо включить \n" +
                 "https://www.youtube.com/watch?v=l2X_NMj8khw   - как включить общедоступную историю матчей \n" +
