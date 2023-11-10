@@ -142,21 +142,16 @@ public class GameMatchService {
 
     /**
      * В метод передается
-     *
      * @param chatId   телеграм айди пользователя
      * @param userMono реактивный поток Mono с типом User
      * @return возвращает реаткивный поток Void
      */
 
-
-
-
-
-    public Mono<Void> matchPlayedOverThePastHours(Long chatId, Mono<User> userMono, Float hours) {
+    public Mono<Void> matchPlayedOverThePastHours(Long chatId, Mono<User> userMono, Long hours) {
 
         return userMono.flatMap(user -> {  // достаем объект User из реактивного потока
             long currentTimestamp = System.currentTimeMillis() / 1000;
-            Float twentyFourHoursAgo = currentTimestamp - (hours * 60 * 60);
+            Long twentyFourHoursAgo = currentTimestamp - hours;
             // Используем полученный объект User, чтобы получить список его матчей
             return getIdMatchesList(user)
                     // Преобразуем список матчей в реактивный поток (Flux)
@@ -191,7 +186,7 @@ public class GameMatchService {
      * @return разницу между сейчас и временем старта + 5 минут
      */
     public Long durationSession(Long startSession){
-        return (Instant.now().getEpochSecond()-startSession)+300000;
+        return (Instant.now().getEpochSecond()-startSession);
     }
 
 }

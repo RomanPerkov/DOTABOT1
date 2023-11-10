@@ -74,7 +74,7 @@ public class GameListenerService {
                                                 },
                                                 () -> {                                                             // если пустой , то выполняем вторую лямбду
                                                     if (user.getDotaStatsId().getStatus() != DotaState.NONGAME ) {
-                                                        gameMatchService.matchPlayedOverThePastHours(user.getChatId(), gameMatchService.getUserByChatId(user.getChatId()), Float.valueOf(gameMatchService.durationSession(user.getDotaStatsId().getStartsession()))).subscribe();                                                            //меняем статус на нон гейм если таковой уже не стоит
+                                                        gameMatchService.matchPlayedOverThePastHours(user.getChatId(), gameMatchService.getUserByChatId(user.getChatId()), gameMatchService.durationSession(user.getDotaStatsId().getStartsession())).subscribe();                                                            //меняем статус на нон гейм если таковой уже не стоит
                                                         user.getDotaStatsId().setStatus(DotaState.NONGAME);
                                                         messageGeneratorService.durationSessionMessage(user.getChatId(),gameMatchService.durationSession(user.getDotaStatsId().getStartsession()));
                                                         user.getDotaStatsId().setStartsession(null);

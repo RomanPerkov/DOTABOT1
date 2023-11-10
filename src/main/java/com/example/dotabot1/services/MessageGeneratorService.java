@@ -33,7 +33,7 @@ public class MessageGeneratorService {
     }
 
     public void generateWelcomeMessage(Long chatId) {
-        messageSendler(chatId, "Добро пожаловать в DotaBot! Для завершения регистрации сядьте на бутылку.");
+        messageSendler(chatId, "Добро пожаловать в DotaBot! Для использования ботом введите комманду /help.");
     }
 
     public void userHasAlreadyBeenCreatedMessage(Long chatId) {

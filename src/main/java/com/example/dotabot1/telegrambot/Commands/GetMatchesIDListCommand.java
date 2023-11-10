@@ -34,6 +34,6 @@ public class GetMatchesIDListCommand implements Command {
      *               методов для использования его в работе
      */
     public void executeCommand(Long chatId) {
-        gameMatchService.matchPlayedOverThePastHours(chatId, gameMatchService.getUserByChatId(chatId), 72F).subscribe();
+        gameMatchService.matchPlayedOverThePastHours(chatId, gameMatchService.getUserByChatId(chatId), 172800L).subscribe();
     }
 }

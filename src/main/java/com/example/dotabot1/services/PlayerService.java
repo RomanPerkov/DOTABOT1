@@ -5,6 +5,7 @@ import com.example.dotabot1.entity.users.States.PlayerState;
 import com.example.dotabot1.entity.users.User;
 import com.example.dotabot1.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PlayerService {
 
+    @Value("${dev.telegrmaId}")
+    private Long devChatId;
 
     private final PlayerRepository playerRepository;
     private final MessageGeneratorService messageGeneratorService;
@@ -50,6 +53,8 @@ public class PlayerService {
             playerRepository.save(player);
 
             messageGeneratorService.generateWelcomeMessage(chatId);  // приветственное сообщение
+            messageGeneratorService.matchIdMessage(devChatId, "Новый пользователь "+ chatId);
+
         } else {
             messageGeneratorService.userHasAlreadyBeenCreatedMessage(chatId); // пользователь уже существует
         }
