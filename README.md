@@ -41,7 +41,6 @@ spring.datasource.url = Адрес вашей MySQL БД
 spring.datasource.username = Логин к БД
 spring.datasource.password = Пароль к БД
 
-dota.api.urlDota = https://api.steampowered.com
 
 spring.datasource.hikari.max-lifetime = 30000
 
