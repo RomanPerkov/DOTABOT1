@@ -2,7 +2,7 @@ package com.example.dotabot1.telegrambot.updatehandler;
 
 import com.example.dotabot1.entity.users.States.PlayerState;
 import com.example.dotabot1.repository.PlayerRepository;
-import com.example.dotabot1.telegrambot.Commands.CommandHandler;
+import com.example.dotabot1.telegrambot.commands.CommandHandler;
 import com.example.dotabot1.telegrambot.states.StateHandler;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;

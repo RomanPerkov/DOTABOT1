@@ -1,4 +1,4 @@
-package com.example.dotabot1.services.keyboard;
+package com.example.dotabot1.services.keyboardservice;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 

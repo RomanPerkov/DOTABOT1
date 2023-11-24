@@ -25,7 +25,7 @@ public class ExceptionInterceptorAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(ExceptionInterceptorAspect.class);
 
-    @AfterThrowing(pointcut = "execution(* com.example.dotabot1..*(..))", throwing = "ex")   // обрабатываем все классы в проекте
+    @AfterThrowing(pointcut = "execution(* com.example.dotabot1..*(..)) && !execution(* com.example.dotabot1.services.MessageGeneratorService.exceptionSendFromDeveloper(..))", throwing = "ex")   // обрабатываем все классы в проекте
     public void afterThrowingAdvice(JoinPoint joinPoint, Throwable ex) {
         // Логирование и другие операции
         logger.error("An exception has been thrown in {} : {}", joinPoint.getSignature().toShortString(), ex.getMessage());

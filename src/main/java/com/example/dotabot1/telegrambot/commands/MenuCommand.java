@@ -1,7 +1,7 @@
-package com.example.dotabot1.telegrambot.Commands;
+package com.example.dotabot1.telegrambot.commands;
 
-import com.example.dotabot1.services.keyboard.KeyboardGeneratorService;
-import com.example.dotabot1.services.keyboard.KeyboardType;
+import com.example.dotabot1.services.keyboardservice.KeyboardGeneratorService;
+import com.example.dotabot1.services.keyboardservice.KeyboardType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

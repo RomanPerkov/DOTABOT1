@@ -1,4 +1,4 @@
-package com.example.dotabot1.telegrambot.Commands;
+package com.example.dotabot1.telegrambot.commands;
 
 import org.springframework.stereotype.Service;
 
@@ -20,14 +20,12 @@ import java.util.Map;
  *   Это позволяет автоматически инициализировать Map с доступными командами.
  */
 @Service
-//@RequiredArgsConstructor
 public class CommandHandler {
     private final  Map<String, Command> commandMap = new HashMap<>();
 
     /**
      * Конструктор класса. Принимает список команд и добавляет их в commandMap.
      * Список команд автоматически инжектируется Spring'ом.
-     *
      * @param commands Список команд для обработки.
      */
     public CommandHandler(List<Command> commands) {

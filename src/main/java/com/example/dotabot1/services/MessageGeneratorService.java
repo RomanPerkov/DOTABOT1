@@ -20,7 +20,6 @@ public class MessageGeneratorService {
 
     private final DotaBot dotaBot;
 
-
     public void messageSendler(Long chatId, String message) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);

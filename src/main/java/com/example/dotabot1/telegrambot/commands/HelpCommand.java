@@ -1,23 +1,22 @@
-package com.example.dotabot1.telegrambot.Commands;
+package com.example.dotabot1.telegrambot.commands;
 
-
-import com.example.dotabot1.services.PlayerService;
+import com.example.dotabot1.services.MessageGeneratorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.example.dotabot1.constants.Constants.CommandsConstants.START_COMMAND;
+import static com.example.dotabot1.constants.Constants.CommandsConstants.HELP_COMMAND;
 
 
 /**
- * Класс реализует интерфейс Command и предназначен для обработки команды START.
+ * Класс реализует интерфейс Command и предназначен для обработки команды HELP.
  * Аннотация @RequiredArgsConstructor генерирует конструктор с одним параметром для каждого final поля,
  * что позволяет Spring автоматически внедрять зависимости через этот конструктор.
  */
 @Service
 @RequiredArgsConstructor
-public class StartCommand implements Command {
+public class HelpCommand implements Command {
 
-    private final  PlayerService playerService;
+    private final MessageGeneratorService messageGeneratorService;
 
 
     /**
@@ -26,15 +25,16 @@ public class StartCommand implements Command {
      */
     @Override
     public String getName() {
-        return START_COMMAND;
+        return HELP_COMMAND;
     }
 
+
     /**
-     * Метод выполняет действие, связанное с командой START — регистрирует нового игрока.
+     * Метод выполняет действие, связанное с командой HELP — выводит справочное сообщение.
      * @param chatId идентификатор чата, в котором необходимо выполнить команду.
      */
     @Override
     public void executeCommand(Long chatId) {
-        playerService.registerNewPlayer(chatId);
+        messageGeneratorService.helpMessage(chatId);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.dotabot1.services.keyboard;
+package com.example.dotabot1.services.keyboardservice;
 
 
 import com.example.dotabot1.telegrambot.DotaBot;
@@ -21,7 +21,6 @@ public class KeyboardGeneratorService {
     private final DotaBot dotaBot;    // Поле для доступа к функциональности бота
 
     private final Map<KeyboardType, KeyboardBuilder> keyboardBuilders;   // Карта для хранения различных видов клавиатур, где каждый тип клавиатуры ассоциирован с его конструктором
-
 
     /**
      * Конструктор для KeyboardGeneratorService.
@@ -50,7 +49,6 @@ public class KeyboardGeneratorService {
         editMarkup.setChatId(chatId.toString());
         editMarkup.setMessageId(messageId);
         editMarkup.setReplyMarkup(null);
-
         try {
             dotaBot.execute(editMarkup);
         } catch (TelegramApiException e) {

@@ -1,4 +1,4 @@
-package com.example.dotabot1.telegrambot.Commands;
+package com.example.dotabot1.telegrambot.commands;
 
 import com.example.dotabot1.entity.users.User;
 import com.example.dotabot1.repository.PlayerRepository;

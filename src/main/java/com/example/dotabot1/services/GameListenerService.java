@@ -58,6 +58,7 @@ public class GameListenerService {
                 //используем оптионал для нулл
                 requestMono.subscribe(request ->                    //подписываемся на поток НАЧАЛО ПЕРВОЙ ЛЯМБЫ subscribe
                                 Optional.ofNullable(request)
+
                                         // создаем оптиона с реквест или пусто
                                         .map(Request::getResponse)                   // преобразовываем реквест в респонс
                                         .map(r -> r.getPlayers().get(0))              //преобразовываем респонс в плауер
