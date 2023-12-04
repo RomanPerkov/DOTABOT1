@@ -1,4 +1,4 @@
-package com.example.dotabot1.entity.users.States;
+package com.example.dotabot1.model.entity.users.States;
 
 /**
  * Класс перечисление описывающий состояния стим аккаунта в игре или нет

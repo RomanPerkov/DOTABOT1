@@ -1,6 +1,6 @@
 package com.example.dotabot1.telegrambot.states;
 
-import com.example.dotabot1.entity.users.User;
+import com.example.dotabot1.model.entity.users.User;
 
 /**
  * Функциональный интерфейс создан для реализации лямбд-выражений в реактивных запросах.

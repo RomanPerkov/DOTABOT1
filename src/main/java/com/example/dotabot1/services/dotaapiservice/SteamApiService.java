@@ -1,8 +1,8 @@
 package com.example.dotabot1.services.dotaapiservice;
 
-import com.example.dotabot1.dto.matches.RequestHistory;
-import com.example.dotabot1.dto.matchesdetails.MatchDetails;
-import com.example.dotabot1.dto.player.Request;
+import com.example.dotabot1.model.dto.matches.RequestHistory;
+import com.example.dotabot1.model.dto.matchesdetails.MatchDetails;
+import com.example.dotabot1.model.dto.player.Request;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

@@ -1,6 +1,6 @@
-package com.example.dotabot1.entity.users;
+package com.example.dotabot1.model.entity.users;
 
-import com.example.dotabot1.entity.users.States.DotaState;
+import com.example.dotabot1.model.entity.users.States.DotaState;
 import jakarta.persistence.*;
 import lombok.*;
 

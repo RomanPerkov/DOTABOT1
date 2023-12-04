@@ -1,7 +1,7 @@
 package com.example.dotabot1.telegrambot.states;
 
-import com.example.dotabot1.dto.player.Request;
-import com.example.dotabot1.entity.users.User;
+import com.example.dotabot1.model.dto.player.Request;
+import com.example.dotabot1.model.entity.users.User;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,6 @@
 package com.example.dotabot1.repository;
 
-import com.example.dotabot1.entity.users.User;
+import com.example.dotabot1.model.entity.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

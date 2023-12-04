@@ -1,4 +1,4 @@
-package com.example.dotabot1.dto.player;
+package com.example.dotabot1.model.dto.player;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

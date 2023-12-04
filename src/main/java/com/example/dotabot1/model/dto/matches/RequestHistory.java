@@ -1,4 +1,4 @@
-package com.example.dotabot1.dto.matches;
+package com.example.dotabot1.model.dto.matches;
 
 import lombok.Getter;
 import lombok.Setter;

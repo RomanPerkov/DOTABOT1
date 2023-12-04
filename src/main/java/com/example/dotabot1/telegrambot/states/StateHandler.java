@@ -1,7 +1,7 @@
 package com.example.dotabot1.telegrambot.states;
 
 
-import com.example.dotabot1.entity.users.States.PlayerState;
+import com.example.dotabot1.model.entity.users.States.PlayerState;
 
 /**
  * Обработчик состояний

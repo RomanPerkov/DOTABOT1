@@ -1,10 +1,10 @@
 package com.example.dotabot1.services;
 
 
-import com.example.dotabot1.dto.player.Player;
-import com.example.dotabot1.dto.player.Request;
-import com.example.dotabot1.entity.users.States.DotaState;
-import com.example.dotabot1.entity.users.User;
+import com.example.dotabot1.model.dto.player.Player;
+import com.example.dotabot1.model.dto.player.Request;
+import com.example.dotabot1.model.entity.users.States.DotaState;
+import com.example.dotabot1.model.entity.users.User;
 import com.example.dotabot1.repository.PlayerRepository;
 import com.example.dotabot1.services.dotaapiservice.SteamApiService;
 import jakarta.transaction.Transactional;

@@ -1,6 +1,6 @@
 package com.example.dotabot1.сontroller;
 
-import com.example.dotabot1.entity.users.User;
+import com.example.dotabot1.model.entity.users.User;
 import com.example.dotabot1.repository.PlayerRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

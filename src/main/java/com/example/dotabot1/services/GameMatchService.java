@@ -1,9 +1,9 @@
 package com.example.dotabot1.services;
 
-import com.example.dotabot1.dto.matches.Matches;
-import com.example.dotabot1.dto.matchesdetails.MatchDetails;
-import com.example.dotabot1.dto.matchesdetails.Players;
-import com.example.dotabot1.entity.users.User;
+import com.example.dotabot1.model.dto.matches.Matches;
+import com.example.dotabot1.model.dto.matchesdetails.MatchDetails;
+import com.example.dotabot1.model.dto.matchesdetails.Players;
+import com.example.dotabot1.model.entity.users.User;
 import com.example.dotabot1.repository.PlayerRepository;
 import com.example.dotabot1.services.dotaapiservice.SteamApiService;
 import lombok.RequiredArgsConstructor;

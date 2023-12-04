@@ -1,6 +1,6 @@
 package com.example.dotabot1.services;
 
-import com.example.dotabot1.dto.matchesdetails.MatchDetails;
+import com.example.dotabot1.model.dto.matchesdetails.MatchDetails;
 import com.example.dotabot1.telegrambot.DotaBot;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
