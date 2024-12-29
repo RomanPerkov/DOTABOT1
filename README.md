@@ -44,6 +44,4 @@ spring.datasource.password = Пароль к БД
 
 spring.datasource.hikari.max-lifetime = 30000
 
-arduino
-Copy code
 Значение `spring.datasource.hikari.max-lifetime` - это время жизни соединения (Hikari) и является опциональным.
